@@ -1,4 +1,3 @@
-// src/utils/loginUtil.ts
 import { Page } from 'playwright';
 import LoginPage from '../pages/LoginPage';
 
@@ -8,7 +7,7 @@ import LoginPage from '../pages/LoginPage';
  * @param {string} username - The username.
  * @param {string} password - The password.
  */
-export async function login(page: Page, username: string, password: string = 'secret_sauce') {
+export async function login(page: Page, username: string, password: string) {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
     await loginPage.login(username, password);
