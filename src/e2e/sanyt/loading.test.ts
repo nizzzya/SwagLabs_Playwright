@@ -25,13 +25,13 @@ describe('Sanyt testing for all users', () => {
     });
 
     users.forEach((user: { username: string; password: string }) => {
-        test('Correct url for user:' + user.username, async () => {
+        test(`Correct url for user: ${user.username}`, async () => {
             await login(page, user.username, user.password);
             const currentUrl = page.url();
             expect(currentUrl).toBe('https://www.saucedemo.com/v1/inventory.html');
         });
 
-        test('Check server response for user:' + user.username, async () => {
+        test(`Check server response for user: ${user.username}`, async () => {
             await login(page, user.username, user.password);
             // Listening to the response
             page.on('response', response => {
@@ -39,7 +39,7 @@ describe('Sanyt testing for all users', () => {
             });
         });
 
-        test('Checking the loading time of the site for user:' + user.username, async () => {
+        test(`Checking the loading time of the site for user: ${user.username}`, async () => {
             const startTime = Date.now();
             await login(page, user.username, user.password);
             const endTime = Date.now();
