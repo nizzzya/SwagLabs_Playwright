@@ -4,7 +4,7 @@ import type { Config } from '@jest/types';
 const config: Config.InitialOptions = {
     preset: 'ts-jest',
     testEnvironment: 'node',
-    testTimeout: 30000,
+    testTimeout: 7000,
     transform: {
         '^.+\\.ts$': 'ts-jest',
     },
