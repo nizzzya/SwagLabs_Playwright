@@ -2,9 +2,20 @@ import { test, expect } from '@playwright/test';
 import users from '../data/users.json';
 import { login } from '../utils/loginUtil';
 
+
+
 users.forEach(user => {
-    test(`C1101: Add a product to the cart on the Catalog page =>${user.username}`, async ({ page }) => {
+
+    test.beforeEach(async ({page }) => {
         await login(page, user.username, user.password);
+    });
+
+    test.afterEach(async ({ page }) => {
+        page.close
+    });
+
+    test(`C1101: Add a product to the cart on the Catalog page =>${user.username}`, async ({ page }) => {
+        // await login(page, user.username, user.password);
         // badge is enpty
         let badge = await page.$('#shopping_cart_container .shopping_cart_badge');
         expect(badge).toBeNull();
@@ -31,21 +42,21 @@ users.forEach(user => {
 
     });
 
-    test(`Check the switch to product page by click on Title from Catalog page =>${user.username}`, async ({ page }) => {
+    test(`С1201: Check the switch to product page by click on Title from Catalog page =>${user.username}`, async ({ page }) => {
         await login(page, user.username, user.password);// badge is enpty
 
         await page.click('#item_2_title_link');
         expect(page.url).toBe('https://www.saucedemo.com/v1/inventory-item.html?id=2');
     });
 
-    test(`Check the switch to product page by click on Image from Catalog page =>${user.username}`, async ({ page }) => {
+    test(`С1202: Check the switch to product page by click on Image from Catalog page =>${user.username}`, async ({ page }) => {
         await login(page, user.username, user.password);// badge is enpty
 
         await page.click('#item_2_img_link');
         expect(page.url).toBe('https://www.saucedemo.com/v1/inventory-item.html?id=2');
     });
 
-    test(`Add a product to the cart on the Product page =>${user.username}`, async ({ page }) => {
+    test(`С1203: Add a product to the cart on the Product page =>${user.username}`, async ({ page }) => {
         await login(page, user.username, user.password);
 
         await page.click('#item_2_title_link');
@@ -56,7 +67,7 @@ users.forEach(user => {
         expect(badgeText?.trim()).toBe('1');
     });
 
-    test(`Remove a product from the cart on the Product page used 'Remove' button =>${user.username}`, async ({ page }) => {
+    test(`С1204: Remove a product from the cart on the Product page used 'Remove' button =>${user.username}`, async ({ page }) => {
         await login(page, user.username, user.password);
 
         await page.click('#item_2_title_link');
@@ -72,7 +83,7 @@ users.forEach(user => {
         expect(badge).toBeNull();
     });
 
-    test(`Check the return from Product page by "Back" button =>${user.username}`, async ({ page }) => {
+    test(`С1205: Check the return from Product page by "Back" button =>${user.username}`, async ({ page }) => {
         await login(page, user.username, user.password);// badge is enpty
 
         await page.click('#item_2_title_link');
